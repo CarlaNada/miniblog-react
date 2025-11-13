@@ -11,7 +11,7 @@ export function AuthProvider({ children }) {
     if (!token) { setUser(null); return; }
     try {
       const claims = jwtDecode(token);
-      // exp en segundos UNIX
+
       const isExpired = claims.exp * 1000 < Date.now();
       if (isExpired) {
         localStorage.removeItem("token");
@@ -27,6 +27,7 @@ export function AuthProvider({ children }) {
     }
   }, [token]);
 
+// Funciones de control
   const login = (newToken) => {
     localStorage.setItem("token", newToken);
     setToken(newToken);
