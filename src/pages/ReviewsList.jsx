@@ -9,8 +9,14 @@ export default function ReviewsList() {
   const [items, setItems] = useState([]);
   const { token, user } = useAuth();
 
-  const cargar = async () => setItems(await api.listReviews(id));
-  useEffect(() => { cargar(); }, [id]);
+  const cargar = async () => {
+    const data = await api.listReviews(id);
+    setItems(data);
+  };
+
+  useEffect(() => {
+    cargar();
+  }, [id]);
 
   const eliminar = async (rid) => {
     if (!confirm("¿Eliminar review?")) return;
@@ -23,10 +29,27 @@ export default function ReviewsList() {
       <Button component={Link} to={`/posts/${id}/reviews/new`}>Nueva review</Button>
       <List>
         {items.map(r => (
-          <ListItem key={r.id} secondaryAction={
-            user ? <Button color="error" onClick={() => eliminar(r.id)}>Eliminar</Button> : null
-          }>
-            <ListItemText primary={r.content} secondary={`user_id: ${r.user_id}`} />
+          <ListItem
+            key={r.id}
+            secondaryAction={
+              user &&
+              (user.role === "admin" ||
+                user.role === "moderator" ||
+                user.user_id === r.user_id) && (
+                <Button
+                  color="error"
+                  onClick={() => eliminar(r.id)}
+                >
+                  Eliminar
+                </Button>
+              )
+            }
+          >
+            {/* el backend devuelve text y user_id */}
+            <ListItemText
+              primary={r.text}
+              secondary={`user_id: ${r.user_id}`}
+            />
           </ListItem>
         ))}
       </List>

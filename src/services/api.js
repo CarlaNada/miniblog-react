@@ -20,6 +20,9 @@ export const api = {
   register: (payload) => request("/api/register", { method: "POST", body: payload }),
   login: (payload) => request("/api/login", { method: "POST", body: payload }),
 
+  //Categoria
+  listCategories: () => request("/api/categories"),
+
   // Posts
   listPosts: () => request("/api/posts"),
   getPost: (id) => request(`/api/posts/${id}`),

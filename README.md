@@ -20,6 +20,19 @@ Para levantar el proyecto en tu entorno local:
     npm run dev
     http://localhost:5173
 
+## Roles para prueba
+    Usuario: Carla2
+    email: meolvidelacontra@google.com
+    password: carla123
+
+    Usuario: Moderador
+    email: modera@elmoderador.com
+    password: lamather
+
+    Usuario: EL Admin
+    email: admin@admin.com
+    password: soyeladmin
+
 # React + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
